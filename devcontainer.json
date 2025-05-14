@@ -20,7 +20,29 @@
                 "latex-workshop.formatting.latex": "latexindent",
                 "latex-workshop.intellisense.package.enabled": true,
                 "latex-workshop.latex.clean.fileTypes": [
-                    "out/*"
+                    "*.aux",
+                    "*.bbl",
+                    "*.blg",
+                    "*.idx",
+                    "*.ind",
+                    "*.lof",
+                    "*.lot",
+                    "*.out",
+                    "*.toc",
+                    "*.acn",
+                    "*.acr",
+                    "*.alg",
+                    "*.glg",
+                    "*.glo",
+                    "*.gls",
+                    "*.ist",
+                    "*.fls",
+                    "*.log",
+                    "*.fdb_latexmk",
+                    "*.snm",
+                    "*.nav",
+                    "*.dvi",
+                    "*.synctex.gz"
                 ],
                 "latex-workshop.latex.outDir": "out",
                 "latex-workshop.latex.recipes": [
@@ -57,11 +79,10 @@
                     "%DIR%/",
                     "%TMPFILE%",
                     "-l",
-                    "%DIR%/.devcontainer/latex-devcontainer/latexindent.yaml",
+                    "${localWorkspaceFolder}/.devcontainer/latex-devcontainer/latexindent.yaml",
                     "-r"
                 ]
             }
         }
-    },
-    "postCreateCommand": "latexmk -C"
+    }
 }
