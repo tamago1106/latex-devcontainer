@@ -1,0 +1,67 @@
+{
+    "name": "texlive",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/${localWorkspaceFolder},type=bind,consistency=cached"
+    ],
+    "workspaceFolder": "/${localWorkspaceFolder}",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "James-Yu.latex-workshop"
+            ],
+            "settings": {
+                "[latex]": {
+                    "editor.wordWrap": "on"
+                },
+                "latex-workshop.formatting.latex": "latexindent",
+                "latex-workshop.intellisense.package.enabled": true,
+                "latex-workshop.latex.clean.fileTypes": [
+                    "out/*"
+                ],
+                "latex-workshop.latex.outDir": "out",
+                "latex-workshop.latex.recipes": [
+                    {
+                        "name": "latexmk",
+                        "tools": [
+                            "latexmk",
+                            "move-pdf"
+                        ]
+                    }
+                ],
+                "latex-workshop.latex.tools": [
+                    {
+                        "name": "latexmk",
+                        "command": "latexmk",
+                        "args": [
+                            "-silent",
+                            "-outdir=%OUTDIR%",
+                            "%DOC%"
+                        ]
+                    },
+                    {
+                        "name": "move-pdf",
+                        "command": "sh",
+                        "args": [
+                            "-c",
+                            "mv %OUTDIR%/$(basename %DOC% .tex).pdf %DIR%"
+                        ]
+                    }
+                ],
+                "latex-workshop.formatting.latexindent.path": "latexindent",
+                "latex-workshop.formatting.latexindent.args": [
+                    "-c",
+                    "%DIR%/",
+                    "%TMPFILE%",
+                    "-l",
+                    "%DIR%/.devcontainer/latex-devcontainer/latexindent.yaml",
+                    "-r"
+                ]
+            }
+        }
+    },
+    "postCreateCommand": "latexmk -C"
+}
